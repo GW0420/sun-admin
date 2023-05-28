@@ -1,0 +1,7 @@
+<template>
+  <div class="navbar">navbar</div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style></style>
