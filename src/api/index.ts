@@ -1,5 +1,13 @@
 import axios from "axios"
 import { ElMessage } from "element-plus"
+
+// 类型“AxiosResponse<any, any>”上不存在属性
+declare module "axios" {
+  interface AxiosInstance {
+    (config: AxiosRequestConfig): Promise<any>
+  }
+}
+
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
@@ -8,7 +16,7 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(config => {
   // 添加icode
-  config.headers.icode = "6EE580D59E7805C2"
+  config.headers.icode = "7B1930EC17D67B6D"
   // 这个位置需要统一注入token
   // if (store.getters.token) {
   //   if (isCheckTimeout()) {
@@ -30,7 +38,7 @@ service.interceptors.response.use(
     const { success, message, data } = response.data
     // 要根据success的成功决定下面的操作
     if (success) {
-      return data
+      return response.data
     } else {
       // 业务错误
       ElMessage.error(message)
