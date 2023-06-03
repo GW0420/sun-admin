@@ -42,15 +42,18 @@
 <script lang="ts" setup>
 import { login } from "@/api/modules/sys"
 import { ElMessage } from "element-plus"
+import { useRouter } from "vue-router"
 import { reactive, ref } from "vue"
 import md5 from "md5"
 
+const router = useRouter()
 const username = ref<string>("admin")
 const password = ref<string>("123456")
 
 const onLoginClick = () => {
   login({ username: username.value, password: md5(password.value) }).then(res => {
     ElMessage.success(res.message)
+    router.push("/")
   })
 }
 </script>
