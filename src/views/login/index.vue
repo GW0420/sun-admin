@@ -43,16 +43,19 @@
 import { login } from "@/api/modules/sys"
 import { ElMessage } from "element-plus"
 import { useRouter } from "vue-router"
+import { useStore } from "vuex"
 import { reactive, ref } from "vue"
 import md5 from "md5"
 
 const router = useRouter()
+const store = useStore()
 const username = ref<string>("admin")
 const password = ref<string>("123456")
 
 const onLoginClick = () => {
   login({ username: username.value, password: md5(password.value) }).then(res => {
     ElMessage.success(res.message)
+    store.dispatch("login/useLogin", res.data.token)
     router.push("/")
   })
 }
