@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">profile</div>
+  <div class="permission">permission-list</div>
 </template>
 
 <script setup lang="ts"></script>

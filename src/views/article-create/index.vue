@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">profile</div>
+  <div class="aarticle-create">aarticle-create</div>
 </template>
 
 <script setup lang="ts"></script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">profile</div>
+  <div class="article-ranking">article-ranking</div>
 </template>
 
 <script setup lang="ts"></script>

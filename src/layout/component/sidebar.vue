@@ -3,16 +3,16 @@
     <div v-for="items in menuList" :key="items.path">
       <el-sub-menu :index="items.path" v-if="items.children?.length">
         <template #title>
-          <el-icon><location /></el-icon>
+          <el-icon><component :is="items.meta.icon" /></el-icon>
           <span>{{ items.meta.title }}</span>
         </template>
         <el-menu-item :index="item.path" v-for="item in items.children" :key="item.path">
-          <el-icon><document /></el-icon>
+          <el-icon><component :is="item.meta.icon" /></el-icon>
           <span>{{ item.meta.title }}</span>
         </el-menu-item>
       </el-sub-menu>
       <el-menu-item :index="items.path" v-else>
-        <el-icon><document /></el-icon>
+        <el-icon><component :is="items.meta.icon" /></el-icon>
         <span>{{ items.meta.title }}</span>
       </el-menu-item>
     </div>
@@ -20,21 +20,26 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+console.log(1111, router.getRoutes())
 const menuList = [
   {
     path: "/profile",
     name: "profile",
     meta: {
-      title: "profile",
-      icon: "el-icon-user"
+      title: "个人中心",
+      icon: "UserFilled"
     }
   },
   {
     path: "/user",
+    name: "user",
     redirect: "/user/manage",
     meta: {
-      title: "user",
-      icon: "personnel"
+      title: "用户",
+      icon: "Promotion"
     },
     props: {
       default: false
@@ -42,28 +47,28 @@ const menuList = [
     children: [
       {
         path: "/user/manage",
-        name: "userManage",
+        name: "user-manage",
         meta: {
-          title: "userManage",
-          icon: "personnel-manage"
+          title: "用户管理",
+          icon: "Avatar"
         },
         children: []
       },
       {
         path: "/user/role",
-        name: "userRole",
+        name: "user-role",
         meta: {
-          title: "role",
-          icon: "role"
+          title: "角色列表",
+          icon: "Menu"
         },
         children: []
       },
       {
         path: "/user/permission",
-        name: "userPermission",
+        name: "permission",
         meta: {
-          title: "permission",
-          icon: "permission"
+          title: "权限列表",
+          icon: "HelpFilled"
         },
         children: []
       }
@@ -71,10 +76,11 @@ const menuList = [
   },
   {
     path: "/article",
+    name: "article",
     redirect: "/article/ranking",
     meta: {
-      title: "article",
-      icon: "article"
+      title: "文章",
+      icon: "Tools"
     },
     props: {
       default: false
@@ -82,19 +88,19 @@ const menuList = [
     children: [
       {
         path: "/article/ranking",
-        name: "articleRanking",
+        name: "article-ranking",
         meta: {
-          title: "articleRanking",
-          icon: "article-ranking"
+          title: "文章排名",
+          icon: "Promotion"
         },
         children: []
       },
       {
         path: "/article/create",
-        name: "articleCreate",
+        name: "article-create",
         meta: {
-          title: "articleCreate",
-          icon: "article-create"
+          title: "创建文章",
+          icon: "Management"
         },
         children: []
       }
