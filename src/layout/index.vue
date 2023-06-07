@@ -2,7 +2,7 @@
   <div class="layout">
     <el-container>
       <el-aside width="200px">
-        <div class="aside-title">sunny</div>
+        <logo></logo>
         <sidebar></sidebar>
       </el-aside>
       <el-container>
@@ -16,6 +16,7 @@
 </template>
 
 <script setup lang="ts">
+import logo from "./component/logo.vue"
 import sidebar from "./component/sidebar.vue"
 import navbar from "./component/navbar.vue"
 import appMain from "./component/appMain.vue"
@@ -29,15 +30,16 @@ import appMain from "./component/appMain.vue"
     height: 100%;
     background: #304156;
     border-right: 1px solid #304156;
-    .aside-title {
-      height: 60px;
-      background: orange;
-    }
+    // .aside-title {
+    //   line-height: 60px;
+    //   text-align: center;
+    //   background: #4793ef;
+    // }
   }
   .el-container {
     height: 100%;
     .el-header {
-      background: #ccc;
+      background: #4793ef;
     }
   }
 }

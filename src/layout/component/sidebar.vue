@@ -1,5 +1,12 @@
 <template>
-  <el-menu default-active="2" active-text-color="#ffd04b" background-color="#304156" text-color="#fff" router>
+  <el-menu
+    default-active="2"
+    active-text-color="#ffd04b"
+    background-color="#304156"
+    text-color="#fff"
+    :collapse="false"
+    router
+  >
     <div v-for="items in menuList" :key="items.path">
       <el-sub-menu :index="items.path" v-if="items.children?.length">
         <template #title>
