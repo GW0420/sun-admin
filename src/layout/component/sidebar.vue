@@ -4,7 +4,7 @@
     active-text-color="#ffd04b"
     background-color="#304156"
     text-color="#fff"
-    :collapse="false"
+    :collapse="!$store.getters.isCollapse"
     router
   >
     <div v-for="items in menuList" :key="items.path">

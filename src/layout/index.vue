@@ -1,12 +1,14 @@
 <template>
   <div class="layout">
     <el-container>
-      <el-aside width="200px">
+      <el-aside :class="[$store.getters.isCollapse ? 'sidebarOpen' : 'sidebarClose']">
         <logo></logo>
         <sidebar></sidebar>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <navbar></navbar>
+        </el-header>
         <el-main>
           <!-- <router-view></router-view> -->
           <router-view v-slot="{ Component, route }">
@@ -37,6 +39,14 @@ import appMain from "./component/appMain.vue"
     height: 100%;
     background: #304156;
     border-right: 1px solid #304156;
+    transition: all 0.3s;
+    overflow: hidden;
+    &.sidebarOpen {
+      width: 200px;
+    }
+    &.sidebarClose {
+      width: 50px;
+    }
     // .aside-title {
     //   line-height: 60px;
     //   text-align: center;
@@ -45,8 +55,17 @@ import appMain from "./component/appMain.vue"
   }
   .el-container {
     height: 100%;
+    transition: all 0.3s;
+    &.sidebarOpen {
+      width: calc(100% - 200px);
+    }
+    &.sidebarClose {
+      width: calc(100% - 50px);
+    }
     .el-header {
       background: #4793ef;
+      display: flex;
+      align-items: center;
     }
   }
 }

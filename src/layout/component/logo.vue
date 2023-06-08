@@ -35,7 +35,7 @@
         </g>
       </svg>
     </div>
-    <div class="title">sun-admin</div>
+    <div class="title" v-if="$store.getters.isCollapse">sun-admin</div>
   </div>
 </template>
 

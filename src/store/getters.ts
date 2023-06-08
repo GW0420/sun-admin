@@ -1,3 +1,4 @@
 export const getters = {
-  token: state => state.login.token
+  token: state => state.login.token,
+  isCollapse: state => state.app.isCollapse
 }
