@@ -9,7 +9,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from "vue"
 import { useStore } from "vuex"
 

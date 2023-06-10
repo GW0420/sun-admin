@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import logo from "./component/logo.vue"
 import sidebar from "./component/sidebar.vue"
 import navbar from "./component/navbar.vue"

@@ -2,6 +2,6 @@
   <div class="user">user</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup></script>
 
 <style></style>

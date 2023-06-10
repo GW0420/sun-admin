@@ -1,13 +1,6 @@
 import axios from "axios"
 import { ElMessage } from "element-plus"
 
-// 类型“AxiosResponse<any, any>”上不存在属性
-declare module "axios" {
-  interface AxiosInstance {
-    (config: AxiosRequestConfig): Promise<any>
-  }
-}
-
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000

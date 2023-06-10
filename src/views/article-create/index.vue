@@ -2,6 +2,6 @@
   <div class="aarticle-create">aarticle-create</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup></script>
 
 <style></style>

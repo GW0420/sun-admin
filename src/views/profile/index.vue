@@ -2,6 +2,6 @@
   <div class="profile">profile</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup></script>
 
 <style></style>
