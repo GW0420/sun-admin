@@ -4,4 +4,8 @@
 
 <script setup></script>
 
-<style></style>
+<style lang="scss">
+.profile {
+  color: var(--test);
+}
+</style>

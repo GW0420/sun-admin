@@ -30,7 +30,6 @@
 import { useRouter } from "vue-router"
 
 const router = useRouter()
-console.log(1111, router.getRoutes())
 const menuList = [
   {
     path: "/profile",

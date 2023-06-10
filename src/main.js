@@ -4,8 +4,7 @@ import router from "./router"
 import store from "./store"
 
 // 样式
-import "./style/reset.css"
-import "./style/transition.css"
+import "./style/reset.scss"
 // d登录鉴权
 import "./router/permission"
 // element组件

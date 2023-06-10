@@ -5,7 +5,7 @@ export default {
     token: getItem("token") || ""
   }),
   mutations: {
-    setToken(state, data) {
+    async setToken(state, data) {
       setItem("token", data)
       state.token = data
     }

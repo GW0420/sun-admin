@@ -1,5 +1,6 @@
 import axios from "axios"
 import { ElMessage } from "element-plus"
+import store from "@/store"
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -11,15 +12,15 @@ service.interceptors.request.use(config => {
   // 添加icode
   config.headers.icode = "7B1930EC17D67B6D"
   // 这个位置需要统一注入token
-  // if (store.getters.token) {
-  //   if (isCheckTimeout()) {
-  //     // 登出操作
-  //     store.dispatch("user/logout")
-  //     return Promise.reject(new Error("token 失效"))
-  //   }
-  //   // 如果存在token,注入token
-  //   config.headers.Authorization = `Bearer ${store.getters.token}`
-  // }
+  if (store.getters.token) {
+    // if (isCheckTimeout()) {
+    //   // 登出操作
+    //   store.dispatch("user/logout")
+    //   return Promise.reject(new Error("token 失效"))
+    // }
+    // 如果存在token,注入token
+    config.headers.Authorization = `Bearer ${store.getters.token}`
+  }
   // 配置接口国际化
   // config.headers["Accept-Language"] = store.getters.language
   return config // 必须返回配置

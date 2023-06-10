@@ -49,7 +49,7 @@ import md5 from "md5"
 
 const router = useRouter()
 const store = useStore()
-const username = ref("admin")
+const username = ref("super-admin")
 const password = ref("123456")
 
 const onLoginClick = () => {
