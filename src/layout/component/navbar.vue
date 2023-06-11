@@ -61,7 +61,6 @@ watch(
   route,
   msg => {
     breadcrumbList.value = route.matched.filter(item => item.meta && item.meta.title)
-    console.log(888888888, breadcrumbList.value)
   },
   { deep: true, immediate: true }
 )

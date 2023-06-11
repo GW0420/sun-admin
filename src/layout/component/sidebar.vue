@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="2"
+    :default-active="router"
     active-text-color="#ffd04b"
     background-color="#304156"
     text-color="#fff"
@@ -27,9 +27,10 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router"
+import { watch, ref } from "vue"
+import { useRoute } from "vue-router"
 
-const router = useRouter()
+const route = useRoute()
 const menuList = [
   {
     path: "/profile",
@@ -113,6 +114,16 @@ const menuList = [
     ]
   }
 ]
+
+const router = ref("")
+watch(
+  route,
+  msg => {
+    router.value = msg.path
+    console.log(99999999, msg.path)
+  },
+  { deep: true, immediate: true }
+)
 </script>
 
 <style lang="scss" scoped>
