@@ -4,6 +4,13 @@
       <div class="hamburger" @click="onHumburgerClick">
         <svg-icon class="hamburger" :icon="icon"></svg-icon>
       </div>
+      <div class="breadcrumb">
+        <el-breadcrumb :separator-icon="ArrowRight">
+          <el-breadcrumb-item :to="{ path: '/profile' }" v-for="(item, index) in breadcrumbList" :key="index">
+            {{ item.meta.title }}
+          </el-breadcrumb-item>
+        </el-breadcrumb>
+      </div>
     </div>
     <div class="navbar-right">
       <div class="image">
@@ -22,10 +29,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from "vue"
+import { computed, onMounted, watch, ref } from "vue"
 import { useStore } from "vuex"
-import { useRouter } from "vue-router"
-import { ElMessage } from "element-plus/es"
+import { useRouter, useRoute } from "vue-router"
+import { ArrowRight } from "@element-plus/icons-vue"
 import { profile } from "@/api/modules/sys"
 
 const store = useStore()
@@ -47,14 +54,31 @@ onMounted(async () => {
   const res = await profile()
   console.log("useinfo=>", res)
 })
+
+const route = useRoute()
+const breadcrumbList = ref("")
+watch(
+  route,
+  msg => {
+    breadcrumbList.value = route.matched.filter(item => item.meta && item.meta.title)
+    console.log(888888888, breadcrumbList.value)
+  },
+  { deep: true, immediate: true }
+)
+console.log("fullPath", router.currentRoute)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .navbar {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+  }
   .navbar-right {
     display: flex;
     justify-content: center;
@@ -71,5 +95,21 @@ onMounted(async () => {
       }
     }
   }
+}
+
+:deep(.el-breadcrumb__inner) {
+  color: #000 !important;
+}
+
+:deep(.el-breadcrumb__item:first-child .el-breadcrumb__inner) {
+  font-weight: bold;
+}
+
+:deep(.el-breadcrumb__item:first-child .el-breadcrumb__inner:hover) {
+  font-weight: bold;
+}
+
+:deep(.el-icon svg) {
+  color: #000;
 }
 </style>

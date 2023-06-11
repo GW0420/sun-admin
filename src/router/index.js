@@ -3,25 +3,15 @@ import { createRouter, createWebHashHistory } from "vue-router"
 import layout from "@/layout/index.vue"
 import { userList } from "./modules/user"
 import { articleList } from "./modules/article"
+import { profileList } from "./modules/profile"
 
 const routes = [
   {
     path: "/",
     name: "layout",
+    redirect: "/profile",
     component: layout,
-    children: [
-      {
-        path: "/profile",
-        name: "profile",
-        meta: {
-          title: "个人中心",
-          icon: "UserFilled"
-        },
-        component: () => import("@/views/profile/index.vue")
-      },
-      ...userList,
-      ...articleList
-    ]
+    children: [...profileList, ...userList, ...articleList]
   },
   {
     path: "/login",
