@@ -1,7 +1,7 @@
 export const profileList = [
   {
     path: "/profile",
-    name: "profile",
+    name: "个人中心",
     meta: {
       title: "个人中心",
       icon: "UserFilled"

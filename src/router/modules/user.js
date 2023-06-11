@@ -18,7 +18,7 @@ export const userList = [
       },
       {
         path: "/user/role",
-        name: "角色管理",
+        name: "角色列表",
         component: () => import("@/views/role-list/index.vue"),
         meta: {
           title: "角色列表",
@@ -27,7 +27,7 @@ export const userList = [
       },
       {
         path: "/user/permission",
-        name: "权限管理",
+        name: "权限列表",
         component: () => import("@/views/permission-list/index.vue"),
         meta: {
           title: "权限列表",

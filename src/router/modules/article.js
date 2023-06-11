@@ -1,7 +1,7 @@
 export const articleList = [
   {
     path: "/article",
-    name: "article",
+    name: "文章",
     meta: {
       title: "文章",
       icon: "Tools"
@@ -9,7 +9,7 @@ export const articleList = [
     children: [
       {
         path: "/article/ranking",
-        name: "article-ranking",
+        name: "文章排名",
         component: () => import("@/views/article-ranking/index.vue"),
         meta: {
           title: "文章排名",
@@ -18,7 +18,7 @@ export const articleList = [
       },
       {
         path: "/article/create",
-        name: "article-create",
+        name: "创建文章",
         component: () => import("@/views/article-create/index.vue"),
         meta: {
           title: "创建文章",

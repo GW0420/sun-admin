@@ -120,7 +120,6 @@ watch(
   route,
   msg => {
     router.value = msg.path
-    console.log(99999999, msg.path)
   },
   { deep: true, immediate: true }
 )

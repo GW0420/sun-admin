@@ -9,6 +9,7 @@
         <el-header>
           <navbar></navbar>
         </el-header>
+        <tabs></tabs>
         <el-main>
           <!-- <router-view></router-view> -->
           <router-view v-slot="{ Component, route }">
@@ -28,6 +29,7 @@
 import logo from "./component/logo.vue"
 import sidebar from "./component/sidebar.vue"
 import navbar from "./component/navbar.vue"
+import tabs from "./component/tabs"
 import appMain from "./component/appMain.vue"
 </script>
 
@@ -63,7 +65,8 @@ import appMain from "./component/appMain.vue"
       width: calc(100% - 50px);
     }
     .el-header {
-      background: #4793ef;
+      background: #0099cc;
+      height: 50px;
       display: flex;
       align-items: center;
     }
