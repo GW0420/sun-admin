@@ -1,6 +1,9 @@
 <template>
   <div class="tabs">
     <transition-group name="fade-transform" mode="out-in">
+      <div class="tabs-left">
+        <el-icon @click="onTagsLeft(tagsPath)"><DArrowLeft /></el-icon>
+      </div>
       <div
         v-for="item in tagsList"
         :key="item.path"
@@ -9,6 +12,9 @@
       >
         {{ item.title }}
         <el-icon @click.stop="onTagsClose(item.title)"><Close /></el-icon>
+      </div>
+      <div class="tabs-right">
+        <el-icon @click="onTagsRight(tagsPath)"><DArrowRight /></el-icon>
       </div>
     </transition-group>
   </div>
@@ -48,6 +54,28 @@ const onTagsItemClick = path => {
 const onTagsClose = msg => {
   store.dispatch("app/curTags", msg)
 }
+
+// TODO: 路由左移右移
+const onTagsLeft = path => {
+  const tagsList = store.getters.tagsList
+  let index = tagsList.findIndex(item => item.path === path)
+  if (index > 0) {
+    router.push(tagsList[index - 1]["path"])
+  } else {
+    router.push("/profile")
+  }
+}
+
+const onTagsRight = path => {
+  const tagsList = store.getters.tagsList
+  let index = tagsList.findIndex(item => item.path === path)
+  console.log(11111, index)
+  if (index < tagsList.length) {
+    router.push(tagsList[index + 1]["path"])
+  } else {
+    router.push(tagsList[tagsList.length - 1]["path"])
+  }
+}
 </script>
 
 <style lang="scss">
@@ -56,6 +84,9 @@ const onTagsClose = msg => {
   background: #f3f2f1;
   display: flex;
   align-items: center;
+  padding: 0 40px;
+  position: relative;
+  user-select: none;
   // column-gap: 16px;
   .tabs-item {
     height: 100%;
@@ -66,7 +97,8 @@ const onTagsClose = msg => {
     box-sizing: border-box;
     font-size: 14px;
     cursor: pointer;
-    transition-delay: 0.1s;
+    transition: all 0.3s;
+    transition-delay: 0.2s;
     &.active {
       background: #fff;
       border-bottom: 3px solid #0099cc;
@@ -76,6 +108,22 @@ const onTagsClose = msg => {
     .el-icon {
       margin-left: 8px;
     }
+  }
+  .tabs-left {
+    position: absolute;
+    left: 0;
+    width: 40px;
+    text-align: center;
+    color: grey;
+    cursor: pointer;
+  }
+  .tabs-right {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    text-align: center;
+    color: grey;
+    cursor: pointer;
   }
 }
 </style>
