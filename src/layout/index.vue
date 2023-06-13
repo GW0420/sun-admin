@@ -35,7 +35,7 @@ import appMain from "./component/appMain.vue"
 import { ref, provide } from "vue"
 const isRouterAlive = ref(true)
 
-provide("flag", isRouterAlive)
+provide("isRouterAlive", isRouterAlive)
 </script>
 
 <style lang="scss" scoped>

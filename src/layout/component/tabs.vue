@@ -55,11 +55,11 @@ watch(
 const tagsList = computed(() => store.getters.tagsList)
 
 const router = useRouter()
-let data = inject("flag")
+let isRouterAlive = inject("isRouterAlive")
 const onTagsItemClick = path => {
-  data.value = false
+  isRouterAlive.value = false
   setTimeout(() => {
-    data.value = true
+    isRouterAlive.value = true
     router.push(path)
   }, 300)
 }

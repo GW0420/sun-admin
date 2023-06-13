@@ -8,8 +8,7 @@
 </template>
 
 <script setup>
-import { defineProps, nextTick, inject } from "vue"
-import { useRouter, useRoute } from "vue-router"
+import { defineProps, inject } from "vue"
 
 defineProps({
   index: {
@@ -18,15 +17,12 @@ defineProps({
   }
 })
 
-const router = useRouter()
-const route = useRoute()
-
 // 刷新
-let data = inject("flag")
+let isRouterAlive = inject("isRouterAlive")
 const onRefreshClick = () => {
-  data.value = false
+  isRouterAlive.value = false
   setTimeout(() => {
-    data.value = true
+    isRouterAlive.value = true
   }, 300)
 }
 
