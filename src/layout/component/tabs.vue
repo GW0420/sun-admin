@@ -9,7 +9,7 @@
         :key="item.path"
         :class="['tabs-item', item.path === tagsPath ? 'active' : '']"
         @click="onTagsItemClick(item.path)"
-        @contextmenu.prevent="openMenu($event, index)"
+        @contextmenu.prevent="openMenu($event, item.path)"
       >
         {{ item.title }}
         <el-icon @click.stop="onTagsClose(item.title)"><Close /></el-icon>
@@ -18,13 +18,7 @@
         <el-icon @click="onTagsRight(tagsPath)"><DArrowRight /></el-icon>
       </div>
     </transition-group>
-    <ContextMenu
-      v-show="visible"
-      :style="menuStyle"
-      :index="selectIndex"
-      class="animate__animated animate__fadeIn"
-      :key="key"
-    ></ContextMenu>
+    <ContextMenu v-show="visible" :style="menuStyle" class="animate__animated animate__fadeIn" :key="key"></ContextMenu>
   </div>
 </template>
 
@@ -91,7 +85,7 @@ const onTagsRight = path => {
 }
 
 // TODO: 鼠标右键 contextMenu 相关
-const selectIndex = ref(0)
+// const selectIndex = ref(0)
 const visible = ref(false)
 const key = ref(false)
 const menuStyle = reactive({
@@ -100,13 +94,15 @@ const menuStyle = reactive({
 })
 
 // 展示 menu
-const openMenu = (e, index) => {
-  key.value = !key.value
-  const { x, y } = e
-  menuStyle.left = x + "px"
-  menuStyle.top = y + "px"
-  selectIndex.value = index
-  visible.value = true
+const openMenu = (e, path) => {
+  // selectIndex.value = index
+  if (path === tagsPath.value) {
+    key.value = !key.value
+    const { x, y } = e
+    menuStyle.left = x + "px"
+    menuStyle.top = y + "px"
+    visible.value = true
+  }
 }
 
 // 关闭 menu
