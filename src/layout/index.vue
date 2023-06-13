@@ -12,13 +12,13 @@
         <tabs></tabs>
         <el-main>
           <!-- <router-view></router-view> -->
-          <router-view v-slot="{ Component, route }">
-            <transition name="fade-transform" mode="out-in">
+          <transition name="fade-transform" mode="out-in">
+            <router-view v-slot="{ Component, route }" v-if="isRouterAlive">
               <keep-alive>
                 <component :is="Component" :key="route.path" />
               </keep-alive>
-            </transition>
-          </router-view>
+            </router-view>
+          </transition>
         </el-main>
       </el-container>
     </el-container>
@@ -31,6 +31,11 @@ import sidebar from "./component/sidebar.vue"
 import navbar from "./component/navbar.vue"
 import tabs from "./component/tabs"
 import appMain from "./component/appMain.vue"
+
+import { ref, provide } from "vue"
+const isRouterAlive = ref(true)
+
+provide("flag", isRouterAlive)
 </script>
 
 <style lang="scss" scoped>

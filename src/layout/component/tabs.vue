@@ -9,6 +9,7 @@
         :key="item.path"
         :class="['tabs-item', item.path === tagsPath ? 'active' : '']"
         @click="onTagsItemClick(item.path)"
+        @contextmenu.prevent="openMenu($event, index)"
       >
         {{ item.title }}
         <el-icon @click.stop="onTagsClose(item.title)"><Close /></el-icon>
@@ -17,13 +18,21 @@
         <el-icon @click="onTagsRight(tagsPath)"><DArrowRight /></el-icon>
       </div>
     </transition-group>
+    <ContextMenu
+      v-show="visible"
+      :style="menuStyle"
+      :index="selectIndex"
+      class="animate__animated animate__fadeIn"
+      :key="key"
+    ></ContextMenu>
   </div>
 </template>
 
 <script setup>
-import { watch, computed, ref } from "vue"
+import { watch, computed, ref, reactive, inject } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useStore } from "vuex"
+import ContextMenu from "@/components/ContextMenu.vue"
 
 const route = useRoute()
 const store = useStore()
@@ -46,8 +55,13 @@ watch(
 const tagsList = computed(() => store.getters.tagsList)
 
 const router = useRouter()
+let data = inject("flag")
 const onTagsItemClick = path => {
-  router.push(path)
+  data.value = false
+  setTimeout(() => {
+    data.value = true
+    router.push(path)
+  }, 300)
 }
 
 // TODO: 删除当前tabs
@@ -69,13 +83,45 @@ const onTagsLeft = path => {
 const onTagsRight = path => {
   const tagsList = store.getters.tagsList
   let index = tagsList.findIndex(item => item.path === path)
-  console.log(11111, index)
   if (index < tagsList.length) {
     router.push(tagsList[index + 1]["path"])
   } else {
     router.push(tagsList[tagsList.length - 1]["path"])
   }
 }
+
+// TODO: 鼠标右键 contextMenu 相关
+const selectIndex = ref(0)
+const visible = ref(false)
+const key = ref(false)
+const menuStyle = reactive({
+  left: 0,
+  top: 0
+})
+
+// 展示 menu
+const openMenu = (e, index) => {
+  key.value = !key.value
+  const { x, y } = e
+  menuStyle.left = x + "px"
+  menuStyle.top = y + "px"
+  selectIndex.value = index
+  visible.value = true
+}
+
+// 关闭 menu
+const closeMenu = () => {
+  visible.value = false
+}
+
+// 监听变化
+watch(visible, val => {
+  if (val) {
+    document.body.addEventListener("click", closeMenu)
+  } else {
+    document.body.removeEventListener("click", closeMenu)
+  }
+})
 </script>
 
 <style lang="scss">
@@ -98,7 +144,7 @@ const onTagsRight = path => {
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s;
-    transition-delay: 0.2s;
+    transition-delay: 0.1s;
     &.active {
       background: #fff;
       border-bottom: 3px solid #0099cc;
