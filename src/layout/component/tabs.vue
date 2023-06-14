@@ -18,7 +18,13 @@
         <el-icon @click="onTagsRight(tagsPath)"><DArrowRight /></el-icon>
       </div>
     </transition-group>
-    <ContextMenu v-show="visible" :style="menuStyle" class="animate__animated animate__fadeIn" :key="key"></ContextMenu>
+    <ContextMenu
+      v-show="visible"
+      :path="tagsPath"
+      :style="menuStyle"
+      class="animate__animated animate__fadeIn"
+      :key="key"
+    ></ContextMenu>
   </div>
 </template>
 

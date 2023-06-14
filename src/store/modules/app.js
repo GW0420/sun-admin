@@ -26,6 +26,24 @@ export default {
       state.tagsList.splice(index, 1)
       setItem("tagsList", state.tagsList)
       router.push(state.tagsList[state.tagsList.length - 1]["path"])
+    },
+    // 删除左侧标签
+    delLeftTags(state, data) {
+      let index = state.tagsList.findIndex(item => item.path === data)
+      state.tagsList.splice(0, index)
+      setItem("tagsList", state.tagsList)
+    },
+    // 删除右侧标签
+    delRightTags(state, data) {
+      let index = state.tagsList.findIndex(item => item.path === data)
+      state.tagsList.splice(index + 1, state.tagsList.length - 1)
+      setItem("tagsList", state.tagsList)
+    },
+    // 删除其他标签
+    delOtherTags(state, data) {
+      let cur = state.tagsList.find(item => item.path === data)
+      state.tagsList = [cur]
+      setItem("tagsList", state.tagsList)
     }
   },
   actions: {
@@ -40,6 +58,18 @@ export default {
     // 当前tags
     curTags(context, data) {
       context.commit("delCurrentTags", data)
+    },
+    // 删除左侧标签
+    getLeftTags(context, data) {
+      context.commit("delLeftTags", data)
+    },
+    // 删除右侧标签
+    getRightTags(context, data) {
+      context.commit("delRightTags", data)
+    },
+    // 删除其他标签
+    getOtherTags(context, data) {
+      context.commit("delOtherTags", data)
     }
   }
 }

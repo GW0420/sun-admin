@@ -1,19 +1,20 @@
 <template>
   <ul class="context-menu-container">
     <li @click="onRefreshClick">刷新</li>
-    <li @click="onCloseRightClick">关闭右侧</li>
     <li @click="onCloseLeftClick">关闭左侧</li>
+    <li @click="onCloseRightClick">关闭右侧</li>
     <li @click="onCloseOtherClick">关闭其他</li>
   </ul>
 </template>
 
 <script setup>
+import store from "@/store"
 import { defineProps, inject } from "vue"
 
-defineProps({
-  index: {
-    type: Number,
-    required: true
+const props = defineProps({
+  path: {
+    type: String,
+    default: ""
   }
 })
 
@@ -27,13 +28,19 @@ const onRefreshClick = () => {
 }
 
 // 关闭右侧
-const onCloseRightClick = () => {}
+const onCloseRightClick = () => {
+  store.dispatch("app/getRightTags", props.path)
+}
 
 // 关闭左侧
-const onCloseLeftClick = () => {}
+const onCloseLeftClick = () => {
+  store.dispatch("app/getLeftTags", props.path)
+}
 
 // 关闭其他
-const onCloseOtherClick = () => {}
+const onCloseOtherClick = () => {
+  store.dispatch("app/getOtherTags", props.path)
+}
 </script>
 
 <style lang="scss">
