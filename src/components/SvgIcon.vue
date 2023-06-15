@@ -1,5 +1,5 @@
 <template>
-  <svg class="svg-icon" :class="className" aria-hidden="true">
+  <svg class="svg-icon" :style="iconStyle" aria-hidden="true">
     <use :xlink:href="iconName" />
   </svg>
 </template>
@@ -14,19 +14,27 @@ const props = defineProps({
     required: true
   },
   // 图标类名
-  className: {
+  size: {
     type: String,
-    default: ""
+    default: "small"
   }
 })
 
-/**
- * 项目内图标
- */
+// 项目内图标
 const iconName = computed(() => `#icon-${props.icon}`)
+
+// 图标大小
+const iconStyle = computed(() => {
+  let temp = {
+    small: { width: "1em", height: "1em" },
+    middle: { width: "2em", height: "2em" },
+    large: { width: "3em", height: "3em" }
+  }
+  return temp[props.size]
+})
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .svg-icon {
   width: 1em;
   height: 1em;

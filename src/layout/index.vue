@@ -46,23 +46,24 @@ provide("isRouterAlive", isRouterAlive)
     height: 100%;
     background: #001529;
     border-right: 1px solid #001529;
-    transition: all 0.3s;
+    transition: all 0.4s;
     overflow: hidden;
+    user-select: none;
     &.sidebarOpen {
       width: 210px;
     }
     &.sidebarClose {
-      width: 50px;
+      width: 60px;
     }
   }
   .el-container {
     height: 100%;
-    transition: all 0.3s;
+    // transition: all 0.3s;
     &.sidebarOpen {
       width: calc(100% - 210px);
     }
     &.sidebarClose {
-      width: calc(100% - 50px);
+      width: calc(100% - 60px);
     }
     .el-header {
       background: #fff;

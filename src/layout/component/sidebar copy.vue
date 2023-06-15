@@ -1,22 +1,34 @@
 <template>
   <el-menu
-    class="el-menu-vertical-demo"
+    :default-active="router"
     active-text-color="#fff"
     background-color="#001529"
     text-color="#fefefea6"
     :collapse="!$store.getters.isCollapse"
-    :default-active="router"
     router
   >
-    <!-- 子集 menu 菜单 -->
-    <SidebarItem v-for="item in menuList" :key="item.path" :route="item"></SidebarItem>
+    <div v-for="items in menuList" :key="items.path">
+      <el-sub-menu :index="items.path" v-if="items.children?.length">
+        <template #title>
+          <el-icon><component :is="items.meta.icon" /></el-icon>
+          <span>{{ items.meta.title }}</span>
+        </template>
+        <el-menu-item :index="item.path" v-for="item in items.children" :key="item.path">
+          <el-icon><component :is="item.meta.icon" /></el-icon>
+          <span>{{ item.meta.title }}</span>
+        </el-menu-item>
+      </el-sub-menu>
+      <el-menu-item :index="items.path" v-else>
+        <el-icon><component :is="items.meta.icon" /></el-icon>
+        <span>{{ items.meta.title }}</span>
+      </el-menu-item>
+    </div>
   </el-menu>
 </template>
 
 <script setup>
 import { watch, ref } from "vue"
 import { useRoute } from "vue-router"
-import SidebarItem from "./SidebarItem.vue"
 
 const route = useRoute()
 const menuList = [
@@ -35,6 +47,9 @@ const menuList = [
     meta: {
       title: "用户",
       icon: "Promotion"
+    },
+    props: {
+      default: false
     },
     children: [
       {
@@ -73,6 +88,9 @@ const menuList = [
     meta: {
       title: "文章",
       icon: "Tools"
+    },
+    props: {
+      default: false
     },
     children: [
       {
