@@ -11,7 +11,6 @@
         </el-header>
         <tabs></tabs>
         <el-main>
-          <!-- <router-view></router-view> -->
           <transition name="fade-transform" mode="out-in">
             <router-view v-slot="{ Component, route }" v-if="isRouterAlive">
               <keep-alive>
@@ -42,35 +41,31 @@ provide("isRouterAlive", isRouterAlive)
 .layout {
   width: 100vw;
   height: 100vh;
+  border-radius: 7px;
   .el-aside {
     height: 100%;
-    background: #304156;
-    border-right: 1px solid #304156;
+    background: #001529;
+    border-right: 1px solid #001529;
     transition: all 0.3s;
     overflow: hidden;
     &.sidebarOpen {
-      width: 200px;
+      width: 210px;
     }
     &.sidebarClose {
       width: 50px;
     }
-    // .aside-title {
-    //   line-height: 60px;
-    //   text-align: center;
-    //   background: #4793ef;
-    // }
   }
   .el-container {
     height: 100%;
     transition: all 0.3s;
     &.sidebarOpen {
-      width: calc(100% - 200px);
+      width: calc(100% - 210px);
     }
     &.sidebarClose {
       width: calc(100% - 50px);
     }
     .el-header {
-      background: #0099cc;
+      background: #fff;
       height: 50px;
       display: flex;
       align-items: center;

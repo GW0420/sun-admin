@@ -1,9 +1,9 @@
 <template>
   <el-menu
     :default-active="router"
-    active-text-color="#ffd04b"
-    background-color="#304156"
-    text-color="#fff"
+    active-text-color="#fff"
+    background-color="#001529"
+    text-color="#fefefea6"
     :collapse="!$store.getters.isCollapse"
     router
   >
