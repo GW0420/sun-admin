@@ -33,7 +33,6 @@ import { computed, onMounted, watch, ref } from "vue"
 import { useStore } from "vuex"
 import { useRouter, useRoute } from "vue-router"
 import { ArrowRight } from "@element-plus/icons-vue"
-import { profile } from "@/api/modules/sys"
 
 const store = useStore()
 const icon = computed(() => {
@@ -49,11 +48,6 @@ const onDropdownClick = key => {
   store.dispatch("login/useLogin", "")
   router.push("/login")
 }
-
-onMounted(async () => {
-  const res = await profile()
-  console.log("useinfo=>", res)
-})
 
 const route = useRoute()
 const breadcrumbList = ref("")

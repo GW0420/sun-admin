@@ -16,10 +16,8 @@ router.beforeEach(async (to, from, next) => {
   } else {
     // 不存在token,且不在白名单中,退出至登录页
     if (whiteList.indexOf(to.path) > -1) {
-      console.log(7777)
       next()
     } else {
-      console.log(8888)
       next("/login")
     }
   }
