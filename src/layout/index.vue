@@ -2,8 +2,7 @@
   <div class="layout">
     <el-container>
       <el-aside :class="[$store.getters.isCollapse ? 'sidebarOpen' : 'sidebarClose']">
-        <logo></logo>
-        <sidebar></sidebar>
+        <menus></menus>
       </el-aside>
       <el-container>
         <el-header>
@@ -25,11 +24,9 @@
 </template>
 
 <script setup>
-import logo from "./component/logo.vue"
-import sidebar from "./component/sidebar.vue"
+import menus from "./component/menus/index.vue"
 import navbar from "./component/navbar.vue"
 import tabs from "./component/tabs"
-import appMain from "./component/appMain.vue"
 
 import { ref, provide } from "vue"
 const isRouterAlive = ref(true)
