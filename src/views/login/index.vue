@@ -29,7 +29,7 @@
           <input name="" type="password" v-model="password" />
           <label>Password</label>
         </div>
-        <div class="user-btn" @click="onLoginClick">Submit</div>
+        <el-button :loading="loading" @click="onLoginClick">Submit</el-button>
       </form>
       <div class="user-desc">
         Don't have an account?
@@ -51,12 +51,17 @@ const router = useRouter()
 const store = useStore()
 const username = ref("super-admin")
 const password = ref("123456")
+const loading = ref(false)
 
 const onLoginClick = () => {
+  loading.value = true
   login({ username: username.value, password: md5(password.value) }).then(res => {
-    ElMessage.success(res.message)
     store.dispatch("login/useLogin", res.data.token)
-    router.push("/")
+    setTimeout(() => {
+      ElMessage.success(res.message)
+      loading.value = false
+      router.push("/")
+    }, 1000)
   })
 }
 </script>
@@ -136,37 +141,6 @@ const onLoginClick = () => {
   font-size: 12px;
 }
 
-.login-box form .user-btn {
-  text-align: center;
-  color: #000;
-  font-weight: bold;
-  font-size: 16px;
-  background: linear-gradient(to right, #03e9f4, #05686d);
-  // background: #03e9f4;
-  padding: 10px;
-  border-radius: 4px;
-  // position: relative;
-  // display: inline-block;
-  // padding: 10px 20px;
-  // font-weight: bold;
-  // color: #03e9f4;
-  // font-size: 16px;
-  // text-decoration: none;
-  // text-transform: uppercase;
-  // overflow: hidden;
-  // transition: 0.5s;
-  // margin-top: 40px;
-  // letter-spacing: 3px;
-  // cursor: pointer;
-}
-
-.login-box .user-btn:hover {
-  border-radius: 5px;
-  color: #03e9f4;
-  cursor: pointer;
-  transition: all 1s linear;
-}
-
 .login-box a.a2 {
   color: #03e9f4;
   text-decoration: none;
@@ -180,5 +154,15 @@ const onLoginClick = () => {
 .user-desc {
   margin: 20px 0;
   color: #aaa;
+}
+
+.el-button {
+  border: none;
+  color: #03e9f4;
+  width: 100%;
+  background: linear-gradient(to right, #03e9f4, #05686d);
+  &:hover {
+    color: #03e9f4;
+  }
 }
 </style>
