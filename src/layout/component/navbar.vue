@@ -1,9 +1,9 @@
 <template>
   <div class="navbar">
     <div class="navbar-left">
-      <div class="hamburger" @click="onHumburgerClick">
+      <!-- <div class="hamburger" @click="onHumburgerClick">
         <svg-icon class="hamburger" :icon="icon"></svg-icon>
-      </div>
+      </div> -->
       <div class="breadcrumb">
         <el-breadcrumb :separator-icon="ArrowRight">
           <el-breadcrumb-item :to="{ path: '/profile' }" v-for="(item, index) in breadcrumbList" :key="index">
@@ -35,13 +35,13 @@ import { useRouter, useRoute } from "vue-router"
 import { ArrowRight } from "@element-plus/icons-vue"
 
 const store = useStore()
-const icon = computed(() => {
-  console.log("isCollapse", store.getters.isCollapse)
-  return store.getters.isCollapse ? "hamburger-opened" : "hamburger-closed"
-})
-const onHumburgerClick = () => {
-  store.dispatch("app/getCollapse")
-}
+// const icon = computed(() => {
+//   console.log("isCollapse", store.getters.isCollapse)
+//   return store.getters.isCollapse ? "hamburger-opened" : "hamburger-closed"
+// })
+// const onHumburgerClick = () => {
+//   store.dispatch("app/getCollapse")
+// }
 
 const router = useRouter()
 const onDropdownClick = key => {
