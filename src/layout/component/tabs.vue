@@ -11,8 +11,15 @@
         @click="onTagsItemClick(item.path)"
         @contextmenu.prevent="openMenu($event, item.path)"
       >
-        {{ item.title }}
-        <el-icon @click.stop="onTagsClose(item.title)"><Close /></el-icon>
+        <div class="tabs-item-icon">
+          <el-icon><CreditCard /></el-icon>
+        </div>
+        <div class="tabs-item-title">
+          {{ item.title }}
+        </div>
+        <div class="tabs-item-close">
+          <el-icon @click.stop="onTagsClose(item.title)"><Close /></el-icon>
+        </div>
       </div>
       <div class="tabs-right">
         <el-icon @click="onTagsRight(tagsPath)"><DArrowRight /></el-icon>
@@ -61,7 +68,7 @@ const onTagsItemClick = path => {
   setTimeout(() => {
     isRouterAlive.value = true
     router.push(path)
-  }, 300)
+  })
 }
 
 // TODO: 删除当前tabs
@@ -129,36 +136,123 @@ watch(visible, val => {
 <style lang="scss">
 .tabs {
   height: 40px;
-  background: #fff;
+  background: #eef4f9;
+  color: #666;
   display: flex;
   align-items: center;
   padding: 0 40px;
   position: relative;
   user-select: none;
-  box-shadow: 0 0 1px #888;
+  border-bottom: 1px solid #dae1ed;
+  // box-shadow: 0 0 1px #888;
   // column-gap: 16px;
   .tabs-item {
-    height: 70%;
+    margin: 0 1px;
+    background: #fff;
+    height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 16px;
-    box-shadow: 0 0 1px #888;
-    margin-right: 4px;
-    border-radius: 2px;
+    padding: 0 24px;
+    // box-shadow: 0 0 1px #888;
+    // margin-right: 1px;
+    // border-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
     // background: #f3f2f1;
     box-sizing: border-box;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s;
-    transition-delay: 0.1s;
+    // transition-delay: 0.1s;
+    position: relative;
+    &:hover {
+      color: #fff;
+      background: #3963bc;
+      .tabs-item-icon {
+        width: 30px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .el-icon {
+          color: #fff;
+          font-size: 18px;
+        }
+      }
+      .tabs-item-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 14px;
+        height: 14px;
+        // background: orange;
+        border-top: 100%;
+        border-bottom-left-radius: 100%;
+        display: flex;
+        justify-content: flex-end;
+        background: hsla(0, 0%, 100%, 0.3);
+        .el-icon {
+          display: block;
+          font-size: 10px;
+        }
+      }
+    }
     &.active {
-      background: #fff;
-      border-bottom: 3px solid #0099cc;
+      color: #fff;
+      background: #3963bc;
+      // border-bottom: 3px solid #0099cc;
       font-size: 14px;
-      font-weight: bold;
+      // font-weight: bold;
+      .tabs-item-icon {
+        width: 30px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .el-icon {
+          color: #fff;
+          font-size: 18px;
+        }
+      }
+      .tabs-item-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 14px;
+        height: 14px;
+        // background: orange;
+        border-top: 100%;
+        border-bottom-left-radius: 100%;
+        display: flex;
+        justify-content: flex-end;
+        background: hsla(0, 0%, 100%, 0.3);
+        .el-icon {
+          display: block;
+          // margin-left: 8px;
+          font-size: 10px;
+        }
+      }
+    }
+    .tabs-item-title {
+      // margin: 0 4px;
+    }
+    .tabs-item-icon {
+      width: 30px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .el-icon {
+        display: block;
+        color: #3963bc;
+        font-size: 20px;
+      }
     }
     .el-icon {
-      margin-left: 8px;
+      display: none;
+      color: #fff;
+      // margin-left: 8px;
+      font-size: 10px;
     }
   }
   .tabs-left {

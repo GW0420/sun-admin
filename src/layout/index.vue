@@ -63,7 +63,7 @@ provide("isRouterAlive", isRouterAlive)
       width: calc(100% - 60px);
     }
     .el-header {
-      background: #fff;
+      background: #eef4f9;
       height: 50px;
       display: flex;
       align-items: center;
