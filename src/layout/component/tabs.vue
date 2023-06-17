@@ -128,20 +128,24 @@ watch(visible, val => {
 
 <style lang="scss">
 .tabs {
-  height: 35px;
-  background: #f3f2f1;
+  height: 40px;
+  background: #fff;
   display: flex;
   align-items: center;
   padding: 0 40px;
   position: relative;
   user-select: none;
+  box-shadow: 0 0 1px #888;
   // column-gap: 16px;
   .tabs-item {
-    height: 100%;
+    height: 70%;
     display: flex;
     align-items: center;
     padding: 0 16px;
-    background: #f3f2f1;
+    box-shadow: 0 0 1px #888;
+    margin-right: 4px;
+    border-radius: 2px;
+    // background: #f3f2f1;
     box-sizing: border-box;
     font-size: 14px;
     cursor: pointer;

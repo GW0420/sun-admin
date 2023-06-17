@@ -68,6 +68,9 @@ provide("isRouterAlive", isRouterAlive)
       display: flex;
       align-items: center;
     }
+    .el-main {
+      background: #f5f7fa;
+    }
   }
 }
 </style>
