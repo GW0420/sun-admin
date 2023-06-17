@@ -77,8 +77,8 @@ console.log("fullPath", router.currentRoute)
     justify-content: center;
     column-gap: 16px;
     .image {
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       border-radius: 8px;
       overflow: hidden;
       background: #4793ef;
