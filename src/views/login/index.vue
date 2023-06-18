@@ -1,6 +1,23 @@
 <template>
   <div class="container">
-    <vue-particles class="login-background" color="#409EFF" :particleOpacity="0.7" :particlesNumber="60" shapeType="circle" :particleSize="6" linesColor="#409EFF" :linesWidth="1" :lineLinked="true" :lineOpacity="0.4" :linesDistance="150" :moveSpeed="3" :hoverEffect="true" hoverMode="grab" :clickEffect="true" clickMode="push"></vue-particles>
+    <vue-particles
+      class="login-background"
+      color="#409EFF"
+      :particleOpacity="0.7"
+      :particlesNumber="60"
+      shapeType="circle"
+      :particleSize="6"
+      linesColor="#409EFF"
+      :linesWidth="1"
+      :lineLinked="true"
+      :lineOpacity="0.4"
+      :linesDistance="150"
+      :moveSpeed="3"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+    ></vue-particles>
     <div class="login-box">
       <p>Login</p>
       <form>
@@ -12,13 +29,7 @@
           <input name="" type="password" v-model="password" />
           <label>Password</label>
         </div>
-        <div class="user-btn" @click="onLoginClick">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Submit
-        </div>
+        <el-button :loading="loading" @click="onLoginClick">Submit</el-button>
       </form>
       <div class="user-desc">
         Don't have an account?
@@ -28,22 +39,34 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { login } from "@/api/modules/sys"
-import { reactive, ref } from "vue"
+import { ElMessage } from "element-plus"
+import { useRouter } from "vue-router"
+import { useStore } from "vuex"
+import { ref } from "vue"
 import md5 from "md5"
 
-const username = ref<number>()
-const password = ref<number>()
+const router = useRouter()
+const store = useStore()
+const username = ref("super-admin")
+const password = ref("123456")
+const loading = ref(false)
 
 const onLoginClick = () => {
+  loading.value = true
   login({ username: username.value, password: md5(password.value) }).then(res => {
-    console.log(res)
+    store.dispatch("login/useLogin", res.data.token)
+    setTimeout(() => {
+      ElMessage.success(res.message)
+      loading.value = false
+      router.push("/")
+    }, 1000)
   })
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   width: 100%;
   height: 100%;
@@ -66,7 +89,7 @@ const onLoginClick = () => {
   transform: translate(-50%, -55%);
   width: 550px;
   height: 420px;
-  background-color: #d0dded;
+  // background-color: #d0dded;
   border-radius: 10px;
   box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.6);
   padding: 40px;
@@ -118,121 +141,6 @@ const onLoginClick = () => {
   font-size: 12px;
 }
 
-.login-box form .user-btn {
-  position: relative;
-  display: inline-block;
-  padding: 10px 20px;
-  font-weight: bold;
-  color: #03e9f4;
-  font-size: 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  transition: 0.5s;
-  margin-top: 40px;
-  letter-spacing: 3px;
-  cursor: pointer;
-}
-
-.login-box .user-btn:hover {
-  border-radius: 5px;
-  color: #03e9f4;
-  transition: all 1s linear;
-}
-
-.login-box .user-btn span {
-  position: absolute;
-  display: block;
-}
-
-.login-box .user-btn span:nth-child(1) {
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #03e9f4);
-  animation: btn-anim1 1.5s linear infinite;
-}
-
-@keyframes btn-anim1 {
-  0% {
-    left: -100%;
-  }
-
-  50%,
-  100% {
-    left: 100%;
-  }
-}
-
-.login-box .user-btn span:nth-child(2) {
-  top: -100%;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #03e9f4);
-  animation: btn-anim2 1.5s linear infinite;
-  animation-delay: 0.375s;
-}
-
-@keyframes btn-anim2 {
-  0% {
-    top: -100%;
-  }
-
-  50%,
-  100% {
-    top: 100%;
-  }
-}
-
-.login-box .user-btn span:nth-child(3) {
-  bottom: 0;
-  right: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #03e9f4);
-  animation: btn-anim3 1.5s linear infinite;
-  animation-delay: 0.75s;
-}
-
-@keyframes btn-anim3 {
-  0% {
-    right: -100%;
-  }
-
-  50%,
-  100% {
-    right: 100%;
-  }
-}
-
-.login-box .user-btn span:nth-child(4) {
-  bottom: -100%;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(360deg, transparent, #03e9f4);
-  animation: btn-anim4 1.5s linear infinite;
-  animation-delay: 1.125s;
-}
-
-@keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
-  }
-
-  50%,
-  100% {
-    bottom: 100%;
-  }
-}
-
-.login-box p:last-child {
-  color: #aaa;
-  font-size: 14px;
-}
-
 .login-box a.a2 {
   color: #03e9f4;
   text-decoration: none;
@@ -246,5 +154,15 @@ const onLoginClick = () => {
 .user-desc {
   margin: 20px 0;
   color: #aaa;
+}
+
+.el-button {
+  border: none;
+  color: #03e9f4;
+  width: 100%;
+  background: linear-gradient(to right, #03e9f4, #05686d);
+  &:hover {
+    color: #03e9f4;
+  }
 }
 </style>
