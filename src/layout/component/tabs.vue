@@ -4,33 +4,34 @@
       <div class="tabs-left">
         <el-icon @click="onTagsLeft(tagsPath)"><DArrowLeft /></el-icon>
       </div>
-      <div
-        v-for="item in tagsList"
-        :key="item.path"
-        :class="['tabs-item', item.path === tagsPath ? 'active' : '']"
-        @click="onTagsItemClick(item.path)"
-        @contextmenu.prevent="openMenu($event, item.path)"
-      >
-        <div class="tabs-item-icon">
-          <el-icon><CreditCard /></el-icon>
-        </div>
-        <div class="tabs-item-title">
-          {{ item.title }}
-        </div>
-        <div class="tabs-item-close">
-          <el-icon @click.stop="onTagsClose(item.title)"><Close /></el-icon>
-        </div>
-      </div>
+      <swiper :slides-per-view="10" :slideTo="initialSlide" @swiper="setControlledSwiper">
+        <swiper-slide
+          v-for="(item, index) in tagsList"
+          :key="item.path"
+          :class="['tabs-item', item.path === tagsPath ? 'active' : '']"
+          @click="onTagsItemClick(item.path, index)"
+          @contextmenu.prevent="openMenu($event, item.path)"
+        >
+          <div class="tabs-item-icon">
+            <el-icon><CreditCard /></el-icon>
+          </div>
+          <div class="tabs-item-title">
+            {{ item.title }}
+          </div>
+          <div class="tabs-item-close">
+            <el-icon @click.stop="onTagsClose(item.title)"><Close /></el-icon>
+          </div>
+        </swiper-slide>
+      </swiper>
       <div class="tabs-right">
         <el-icon @click="onTagsRight(tagsPath)"><DArrowRight /></el-icon>
       </div>
     </transition-group>
     <ContextMenu
-      v-show="visible"
+      v-show="menuShow"
       :path="tagsPath"
       :style="menuStyle"
       class="animate__animated animate__fadeIn"
-      :key="key"
     ></ContextMenu>
   </div>
 </template>
@@ -40,10 +41,18 @@ import { watch, computed, ref, reactive, inject } from "vue"
 import { useRoute, useRouter } from "vue-router"
 import { useStore } from "vuex"
 import ContextMenu from "@/components/ContextMenu.vue"
+import { Swiper, SwiperSlide, useSwiper } from "swiper/vue"
+import "swiper/css"
 
-const route = useRoute()
+// 定义全局公用变量
+const router = useRouter()
 const store = useStore()
+const route = useRoute()
+const isRouterAlive = inject("isRouterAlive")
 const tagsPath = ref("")
+const tagsList = computed(() => store.getters.tagsList)
+
+// 监听当前路由变化
 watch(
   route,
   msg => {
@@ -59,11 +68,21 @@ watch(
   }
 )
 
-const tagsList = computed(() => store.getters.tagsList)
+// 获取swiper实例
+const swiperData = ref({})
+const swiperLeft = ref(0)
+const setControlledSwiper = swiper => {
+  swiperData.value = swiper
+}
 
-const router = useRouter()
-let isRouterAlive = inject("isRouterAlive")
-const onTagsItemClick = path => {
+// TODO: 当前tabs点击
+const onTagsItemClick = (path, key) => {
+  if (key >= 8) {
+    swiperLeft.value += -200
+  } else {
+    swiperLeft.value = 0
+  }
+  swiperData.value.translateTo(swiperLeft.value, 1000)
   isRouterAlive.value = false
   setTimeout(() => {
     isRouterAlive.value = true
@@ -75,7 +94,6 @@ const onTagsItemClick = path => {
 const onTagsClose = msg => {
   store.dispatch("app/curTags", msg)
 }
-
 // TODO: 路由左移右移
 const onTagsLeft = path => {
   const tagsList = store.getters.tagsList
@@ -86,7 +104,6 @@ const onTagsLeft = path => {
     router.push("/profile")
   }
 }
-
 const onTagsRight = path => {
   const tagsList = store.getters.tagsList
   let index = tagsList.findIndex(item => item.path === path)
@@ -97,34 +114,27 @@ const onTagsRight = path => {
   }
 }
 
-// TODO: 鼠标右键 contextMenu 相关
-// const selectIndex = ref(0)
-const visible = ref(false)
-const key = ref(false)
+// TODO: 鼠标右键 contextMenu 相关)
+const menuShow = ref(false)
 const menuStyle = reactive({
   left: 0,
   top: 0
 })
-
 // 展示 menu
 const openMenu = (e, path) => {
-  // selectIndex.value = index
   if (path === tagsPath.value) {
-    key.value = !key.value
     const { x, y } = e
     menuStyle.left = x + "px"
     menuStyle.top = y + "px"
-    visible.value = true
+    menuShow.value = true
   }
 }
-
 // 关闭 menu
 const closeMenu = () => {
-  visible.value = false
+  menuShow.value = false
 }
-
-// 监听变化
-watch(visible, val => {
+// 监听变化,关闭右键menu弹窗
+watch(menuShow, val => {
   if (val) {
     document.body.addEventListener("click", closeMenu)
   } else {
@@ -143,16 +153,21 @@ watch(visible, val => {
   padding: 0 40px;
   position: relative;
   user-select: none;
-  border-bottom: 1px solid #dae1ed;
-  // box-shadow: 0 0 1px #888;
-  // column-gap: 16px;
+  .swiper {
+    margin-left: 0;
+    width: 200vw;
+  }
   .tabs-item {
+    max-width: 140px;
+    min-width: 100px;
     margin: 0 1px;
     background: #fff;
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 24px;
+    justify-content: center;
+    // padding: 0 24px;
+    white-space: nowrap;
     // box-shadow: 0 0 1px #888;
     // margin-right: 1px;
     // border-radius: 2px;
@@ -233,9 +248,9 @@ watch(visible, val => {
         }
       }
     }
-    .tabs-item-title {
-      // margin: 0 4px;
-    }
+    // .tabs-item-title {
+    //   // margin: 0 4px;
+    // }
     .tabs-item-icon {
       width: 30px;
       height: 40px;
@@ -255,6 +270,7 @@ watch(visible, val => {
       font-size: 10px;
     }
   }
+
   .tabs-left {
     position: absolute;
     left: 0;

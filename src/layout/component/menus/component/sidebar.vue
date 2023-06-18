@@ -92,6 +92,75 @@ const menuList = [
           icon: "Management"
         },
         children: []
+      },
+      {
+        path: "/article/test1",
+        name: "测试标签01",
+        meta: {
+          title: "测试标签01",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/article/test2",
+        name: "测试标签02",
+
+        meta: {
+          title: "测试标签02",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/article/test3",
+        name: "测试标签03",
+
+        meta: {
+          title: "测试标签03",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/article/test4",
+        name: "测试标签04",
+
+        meta: {
+          title: "测试标签01",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/article/test5",
+        name: "测试标签5",
+
+        meta: {
+          title: "测试标签05",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/article/test6",
+        name: "测试标签06",
+
+        meta: {
+          title: "测试标签06",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/article/test7",
+        name: "测试标签07",
+
+        meta: {
+          title: "测试标签07",
+          icon: "Management"
+        },
+        children: []
       }
     ]
   }
