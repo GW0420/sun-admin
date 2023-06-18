@@ -1,6 +1,7 @@
 <template>
   <div class="bread" :style="{ width: $store.getters.isCollapse ? '210px' : '60px' }" @click="onHumburgerClick">
-    <svg-icon class="hamburger" :icon="icon"></svg-icon>
+    <!-- <svg-icon class="hamburger" :icon="icon"></svg-icon> -->
+    <span :class="['iconfont', $store.getters.isCollapse ? 'icon-caidandakai' : 'icon-caidanzhedie']"></span>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ const onHumburgerClick = () => {
   color: #409eff;
   padding-left: 16px;
   box-sizing: border-box;
-  .hamburger {
+  .iconfont {
     cursor: pointer;
   }
 }

@@ -13,7 +13,9 @@
           @contextmenu.prevent="openMenu($event, item.path)"
         >
           <div class="tabs-item-icon">
-            <el-icon><CreditCard /></el-icon>
+            <el-icon>
+              <component :is="item.icon"></component>
+            </el-icon>
           </div>
           <div class="tabs-item-title">
             {{ item.title }}
@@ -58,7 +60,8 @@ watch(
   msg => {
     tagsPath.value = msg.path
     store.dispatch("app/setTags", {
-      title: msg.name,
+      title: msg.meta.title,
+      icon: msg.meta.icon,
       path: msg.path
     })
   },
