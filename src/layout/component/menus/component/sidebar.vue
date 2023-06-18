@@ -178,6 +178,9 @@ watch(
 
 <style lang="scss" scoped>
 .el-menu {
+  height: calc(100% - 90px) !important;
+  overflow: hidden;
+  overflow-y: scroll;
   border-right: initial;
 }
 </style>
