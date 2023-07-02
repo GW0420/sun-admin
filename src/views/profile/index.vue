@@ -6,6 +6,12 @@
       </template>
       <UniversalForm :formData="formData" @confirmData="onConfirmData"></UniversalForm>
     </el-card>
+    <div>
+      6666
+      <pre v-highlight>
+          <code class="language-html hljs">{{code}}</code>
+      </pre>
+    </div>
   </div>
 </template>
 
@@ -66,7 +72,14 @@ const formData = ref([
   }
 ])
 
+const code = ref(`{
+  "searchKeyword": "",
+  "select": "",
+  "beginTime": "",
+  "endTime": ""
+}`)
 const onConfirmData = msg => {
+  code.value = msg
   console.log("🚀 ~ file: index.vue:53 ~ onConfirmData ~ msg:", msg)
 }
 </script>

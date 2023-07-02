@@ -27,6 +27,7 @@
         :placeholder="item.placeholder"
         :clearable="item.clearable ? item.clearable : true"
         :format="item.format"
+        :style="{ width: item.width }"
         v-if="item.type === 'date'"
       />
       <el-date-picker
@@ -35,6 +36,7 @@
         :placeholder="item.placeholder"
         :clearable="item.clearable ? item.clearable : true"
         :format="item.format"
+        :style="{ width: item.width }"
         v-if="item.type === 'datetime'"
       />
     </div>
@@ -44,7 +46,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, watch, ref } from 'vue'
+import { defineProps, defineEmits, watch, ref } from "vue"
 
 const props = defineProps({
   formData: {
@@ -53,7 +55,7 @@ const props = defineProps({
   }
 })
 
-const emits = defineEmits(['confirmData'])
+const emits = defineEmits(["confirmData"])
 
 const formDataList = ref([])
 const submitForm = ref({})
@@ -78,16 +80,16 @@ const onSearchClick = () => {
     .forEach(item => {
       submitForm.value = { ...submitForm.value, ...item }
     })
-  emits('confirmData', submitForm.value)
+  emits("confirmData", submitForm.value)
 }
 
 // 重置
 const onResetClick = () => {
-  formDataList.value.forEach(item => (item.value[1] = ''))
+  formDataList.value.forEach(item => (item.value[1] = ""))
   Object.keys(submitForm.value).forEach(key => {
-    submitForm.value[key] = ''
+    submitForm.value[key] = ""
   })
-  emits('confirmData', submitForm.value)
+  emits("confirmData", submitForm.value)
 }
 </script>
 

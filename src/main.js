@@ -14,9 +14,20 @@ import ElementPlus from "./util/element"
 import InstallIcon from "@/assets/icons/index"
 // 粒子特效组件
 import VueParticles from "vue-particles"
+// highlight.js
+import hljs from "highlight.js"
+import "highlight.js/styles/github.css"
 
 // 注册
 const app = createApp(App)
+
+app.directive("highlight", function (el) {
+  let blocks = el.querySelectorAll("pre code")
+  blocks.forEach(block => {
+    hljs.highlightBlock(block)
+  })
+})
+
 ElementPlus(app)
 InstallIcon(app)
 app.use(store)
