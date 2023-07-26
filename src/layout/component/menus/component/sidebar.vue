@@ -29,37 +29,36 @@ const menuList = [
     }
   },
   {
-    path: "/user",
-    name: "user",
-    redirect: "/user/manage",
+    path: "/features",
+    name: "features",
     meta: {
-      title: "用户",
+      title: "组件",
       icon: "Promotion"
     },
     children: [
       {
-        path: "/user/manage",
-        name: "user-manage",
+        path: "/features/form",
+        name: "form",
         meta: {
-          title: "用户管理",
+          title: "表单组件",
           icon: "Avatar"
         },
         children: []
       },
       {
-        path: "/user/role",
-        name: "user-role",
+        path: "/features/table",
+        name: "table",
         meta: {
-          title: "角色列表",
+          title: "表格组件",
           icon: "Menu"
         },
         children: []
       },
       {
-        path: "/user/permission",
-        name: "permission",
+        path: "/features/modal",
+        name: "modal",
         meta: {
-          title: "权限列表",
+          title: "弹窗组件",
           icon: "HelpFilled"
         },
         children: []
@@ -67,34 +66,15 @@ const menuList = [
     ]
   },
   {
-    path: "/article",
-    name: "article",
-    redirect: "/article/ranking",
+    path: "/test",
+    name: "test",
     meta: {
-      title: "文章",
+      title: "测试",
       icon: "Tools"
     },
     children: [
       {
-        path: "/article/ranking",
-        name: "article-ranking",
-        meta: {
-          title: "文章排名",
-          icon: "Promotion"
-        },
-        children: []
-      },
-      {
-        path: "/article/create",
-        name: "article-create",
-        meta: {
-          title: "创建文章",
-          icon: "Management"
-        },
-        children: []
-      },
-      {
-        path: "/article/test1",
+        path: "/test/test1",
         name: "测试标签01",
         meta: {
           title: "测试标签01",
@@ -103,7 +83,7 @@ const menuList = [
         children: []
       },
       {
-        path: "/article/test2",
+        path: "/test/test2",
         name: "测试标签02",
 
         meta: {
@@ -113,7 +93,7 @@ const menuList = [
         children: []
       },
       {
-        path: "/article/test3",
+        path: "/test/test3",
         name: "测试标签03",
 
         meta: {
@@ -123,7 +103,7 @@ const menuList = [
         children: []
       },
       {
-        path: "/article/test4",
+        path: "/test/test4",
         name: "测试标签04",
 
         meta: {
@@ -133,7 +113,7 @@ const menuList = [
         children: []
       },
       {
-        path: "/article/test5",
+        path: "/test/test5",
         name: "测试标签5",
 
         meta: {
@@ -143,7 +123,7 @@ const menuList = [
         children: []
       },
       {
-        path: "/article/test6",
+        path: "/test/test6",
         name: "测试标签06",
 
         meta: {
@@ -153,11 +133,31 @@ const menuList = [
         children: []
       },
       {
-        path: "/article/test7",
+        path: "/test/test7",
         name: "测试标签07",
 
         meta: {
           title: "测试标签07",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/test/test8",
+        name: "测试标签08",
+
+        meta: {
+          title: "测试标签08",
+          icon: "Management"
+        },
+        children: []
+      },
+      {
+        path: "/test/test9",
+        name: "测试标签09",
+
+        meta: {
+          title: "测试标签09",
           icon: "Management"
         },
         children: []

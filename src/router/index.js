@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router"
 
 import layout from "@/layout/index.vue"
-import { userList } from "./modules/user"
-import { articleList } from "./modules/article"
+import { featuresList } from "./modules/features"
+import { testList } from "./modules/test"
 import { profileList } from "./modules/profile"
 
 const routes = [
@@ -11,7 +11,7 @@ const routes = [
     name: "layout",
     redirect: "/profile",
     component: layout,
-    children: [...profileList, ...userList, ...articleList]
+    children: [...profileList, ...featuresList, ...testList]
   },
   {
     path: "/login",

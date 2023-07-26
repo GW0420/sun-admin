@@ -100,7 +100,7 @@ const onResetClick = () => {
   .btn-primary {
     width: 60px;
     height: 32px;
-    background: #0099cc;
+    background: #3963bc;
     border-radius: 4px;
     font-size: 14px !important;
     line-height: 32px;
@@ -108,7 +108,7 @@ const onResetClick = () => {
     color: #fff;
     cursor: pointer;
     &:hover {
-      background: #0590be;
+      background: #4974ce;
     }
   }
   .btn-reset {
