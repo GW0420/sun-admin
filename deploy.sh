@@ -13,9 +13,9 @@ git init
 
 git add -A
 
-git commit -m "gitee 自动化部署"
+git commit -m "github 自动化部署"
 
-git push -f git@gitee.com:li-li-liming/sun-admin.git master:gh-pages
+git push -f git@github.com:GW0420/sun-admin.git master:gh-pages
 
 cd -
 

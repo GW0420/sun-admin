@@ -1,23 +1,23 @@
-import { createRouter, createWebHashHistory } from "vue-router"
+import { createRouter, createWebHashHistory } from 'vue-router'
 
-import layout from "@/layout/index.vue"
-import { featuresList } from "./modules/features"
-import { testList } from "./modules/test"
-import { profileList } from "./modules/profile"
-import { docsList } from "./modules/docs"
+import layout from '@/layout/index.vue'
+import { featuresList } from './modules/features'
+import { testList } from './modules/test'
+import { profileList } from './modules/profile'
+import { docsList } from './modules/docs'
 
 const routes = [
   {
-    path: "/",
-    name: "layout",
-    redirect: "/profile",
+    path: '/',
+    name: 'layout',
+    redirect: '/docs',
     component: layout,
     children: [...profileList, ...docsList, ...featuresList, ...testList]
   },
   {
-    path: "/login",
-    name: "login",
-    component: () => import("@/views/login/index.vue")
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/index.vue')
   }
 ]
 
