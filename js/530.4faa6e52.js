@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunksun_admin"]=self["webpackChunksun_admin"]||[]).push([[530],{7530:function(n,s,i){i.r(s),i.d(s,{default:function(){return o}});var r=i(6252);const e={class:"permission"};function u(n,s){return(0,r.wg)(),(0,r.iD)("div",e,"permission-list")}var t=i(3744);const a={},c=(0,t.Z)(a,[["render",u]]);var o=c}}]);
+//# sourceMappingURL=530.4faa6e52.js.map

@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunksun_admin"]=self["webpackChunksun_admin"]||[]).push([[744],{8744:function(n,r,e){e.r(r),e.d(r,{default:function(){return d}});var s=e(6252);const a={class:"iframe",src:"https://gw0420.github.io/sun-docs/",frameborder:"0"};function c(n,r){return(0,s.wg)(),(0,s.iD)("iframe",a)}var t=e(3744);const u={},i=(0,t.Z)(u,[["render",c],["__scopeId","data-v-28c5e5c2"]]);var d=i}}]);
+//# sourceMappingURL=744.72be7e49.js.map

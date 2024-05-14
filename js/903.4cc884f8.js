@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunksun_admin"]=self["webpackChunksun_admin"]||[]).push([[903],{6903:function(n,r,e){e.r(r),e.d(r,{default:function(){return f}});var u=e(6252);const s={class:"profile"};function i(n,r){return(0,u.wg)(),(0,u.iD)("div",s,"profile")}var t=e(3744);const a={},c=(0,t.Z)(a,[["render",i]]);var f=c}}]);
+//# sourceMappingURL=903.4cc884f8.js.map
